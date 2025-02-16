@@ -10,16 +10,16 @@ export default {
     },
 
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
+      sans: ["Roboto", "sans-serif"],
       serif: ["Merriweather", "serif"],
     },
     extend: {
       colors: {
-        primary: "#909090",
-        "primary-bright": "#BBBBBB",
-        secondary: "#101010",
-        "bg-primary": "#D9D9D9",
-        "bg-secondary": "#BCBCBC",
+        "brand-yellow": "#FFCE04",
+        "brand-black": "#000000",
+        "brand-brown": "#240E0B",
+        "brand-grey": "#615A5A",
+        "brand-white": "#FFFFFF",
       },
       spacing: {
         128: "32rem",
