@@ -4,14 +4,12 @@ import StreakSection from "./components/sections/StreakSection";
 
 function StreakPage() {
   return (
-    <>
-      <PageWrapper>
-        <div className="flex justify-around box-border pt-8">
-          <StreakSection />
-          <HistorySection />
-        </div>
-      </PageWrapper>
-    </>
+    <PageWrapper>
+      <div className="flex justify-around box-border pt-8">
+        <StreakSection />
+        <HistorySection />
+      </div>
+    </PageWrapper>
   );
 }
 
