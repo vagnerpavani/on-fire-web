@@ -11,6 +11,7 @@ export default {
 
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
+      "sans-alt": ["Montserrat", "sans-serif"],
       serif: ["Merriweather", "serif"],
     },
     extend: {
@@ -20,6 +21,7 @@ export default {
         "brand-brown": "#240E0B",
         "brand-grey": "#615A5A",
         "brand-white": "#FFFFFF",
+        "brand-alt-yellow": "#FFDF53",
       },
       spacing: {
         128: "32rem",
