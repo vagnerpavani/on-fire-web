@@ -5,7 +5,7 @@ import StreakSection from "./components/section/StreakSection";
 function StreakPage() {
   return (
     <PageWrapper>
-      <div className="flex justify-around box-border pt-8">
+      <div className="flex flex-col md:flex-row justify-around box-border pt-8">
         <StreakSection />
         <HistorySection />
       </div>
