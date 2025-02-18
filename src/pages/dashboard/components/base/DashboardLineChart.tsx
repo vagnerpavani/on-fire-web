@@ -9,12 +9,6 @@ import {
   YAxis,
 } from "recharts";
 
-export type DataItem = {
-  name: string;
-} & {
-  [key: string]: number | string;
-} & Omit<{ name: string }, "name">;
-
 type Props = {
   data: DataItem[];
   colors: { [lineName: string]: string };
