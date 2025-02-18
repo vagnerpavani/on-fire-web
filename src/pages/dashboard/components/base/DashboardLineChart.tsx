@@ -9,7 +9,7 @@ import {
   YAxis,
 } from "recharts";
 
-type DataItem = {
+export type DataItem = {
   name: string;
 } & {
   [key: string]: number | string;
