@@ -1,6 +1,6 @@
 import PageWrapper from "../../components/base/PageWrapper";
-import HistorySection from "./components/sections/HistorySection";
-import StreakSection from "./components/sections/StreakSection";
+import HistorySection from "./components/section/HistorySection";
+import StreakSection from "./components/section/StreakSection";
 
 function StreakPage() {
   return (
