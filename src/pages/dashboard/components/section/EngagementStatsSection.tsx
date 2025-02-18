@@ -28,7 +28,7 @@ function EngagementStatsSection() {
     },
   ];
   return (
-    <div className="bg-brand-white drop-shadow-md p-2 rounded-md">
+    <div className="p-2 bg-brand-white  rounded-md mt-2 border-solid border-2 border-gray-100 w-full">
       <h2 className="font-bold text-2xl text-brand-yellow">
         Estátisticas de engajamento
       </h2>

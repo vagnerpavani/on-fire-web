@@ -1,4 +1,4 @@
-import DashboardLineChart, { DataItem } from "../base/DashboardLineChart";
+import DashboardLineChart from "../base/DashboardLineChart";
 
 type Props = {
   title: string;
@@ -7,8 +7,8 @@ type Props = {
 
 function StatsLineChart({ title, data }: Props) {
   return (
-    <div className="w-72 h-48 flex flex-col">
-      <h3 className="">{title}</h3>
+    <div className="w-64 h-48 flex flex-col">
+      <h3 className="pl-8 font-medium">{title}</h3>
       <DashboardLineChart
         colors={{
           received: "#8884d8",
