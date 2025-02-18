@@ -4,38 +4,40 @@ function EngagementStatsSection() {
   const mockData = [
     {
       name: "Newsletter A",
-      received: 200,
-      opened: 100,
-      clicked: 30,
+      hasStreak: 200,
+      noStreak: 100,
     },
     {
       name: "Newsletter B",
-      received: 300,
-      opened: 160,
-      clicked: 50,
+      hasStreak: 250,
+      noStreak: 80,
     },
     {
       name: "Newsletter C",
-      received: 150,
-      opened: 100,
-      clicked: 80,
+      hasStreak: 300,
+      noStreak: 50,
     },
     {
       name: "Newsletter D",
-      received: 300,
-      opened: 100,
-      clicked: 50,
+      hasStreak: 350,
+      noStreak: 30,
     },
   ];
+
+  const colors = { hasStreak: "#2ecc71", noStreak: "#e74c3c " };
   return (
     <div className="p-2 bg-brand-white  rounded-md mt-2 border-solid border-2 border-gray-100 w-full">
       <h2 className="font-bold text-2xl text-brand-yellow w-full md:text-start text-center">
         Estátisticas de engajamento
       </h2>
       <div className="flex justify-between md:flex-row flex-col items-center">
-        <StatsLineChart title="Email" data={mockData} />
-        <StatsLineChart title="Web" data={mockData} />
-        <StatsLineChart title="Saúde" data={mockData} />
+        <StatsLineChart
+          title="Pessoas com streak"
+          data={mockData}
+          colors={colors}
+        />
+        <StatsLineChart title="Web" data={mockData} colors={colors} />
+        <StatsLineChart title="Saúde" data={mockData} colors={colors} />
       </div>
     </div>
   );
