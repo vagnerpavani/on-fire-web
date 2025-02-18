@@ -7,7 +7,7 @@ type Props = {
 
 function StatsLineChart({ title, data }: Props) {
   return (
-    <div className="w-64 h-48 flex flex-col">
+    <div className="w-full md:w-128 h-64 flex flex-col">
       <h3 className="pl-8 font-medium">{title}</h3>
       <DashboardLineChart
         colors={{
