@@ -23,10 +23,10 @@ function TrafficStatsSection() {
   ];
   return (
     <div className="p-2 bg-brand-white  rounded-md  my-2 border-solid border-2 border-gray-100">
-      <h2 className="text-2xl font-bold text-brand-yellow ">
+      <h2 className="text-2xl font-bold text-brand-yellow w-full md:text-start text-center">
         Estátisticas de tráfego:
       </h2>
-      <div className="flex justify-around">
+      <div className="flex justify-around flex-col items-center md:flex-row ">
         <SourcePieChart data={pieDataMock} />
         <ReaderBarChart data={barDataMock} />
       </div>

@@ -29,10 +29,10 @@ function EngagementStatsSection() {
   ];
   return (
     <div className="p-2 bg-brand-white  rounded-md mt-2 border-solid border-2 border-gray-100 w-full">
-      <h2 className="font-bold text-2xl text-brand-yellow">
+      <h2 className="font-bold text-2xl text-brand-yellow w-full md:text-start text-center">
         Estátisticas de engajamento
       </h2>
-      <div className="flex justify-between">
+      <div className="flex justify-between md:flex-row flex-col items-center">
         <StatsLineChart title="Email" data={mockData} />
         <StatsLineChart title="Web" data={mockData} />
         <StatsLineChart title="Saúde" data={mockData} />

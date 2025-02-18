@@ -2,7 +2,7 @@ import Reader from "../base/Reader";
 
 function ReaderRankingSection() {
   return (
-    <div className="p-2 bg-brand-white  rounded-md my-2 border-solid border-2 w-fit border-gray-100">
+    <div className="p-2 bg-brand-white  rounded-md border-solid border-2 md:w-fit border-gray-100 flex flex-col items-stretch">
       <h2 className="text-2xl font-bold text-brand-yellow">
         Leitores mais engajados:
       </h2>

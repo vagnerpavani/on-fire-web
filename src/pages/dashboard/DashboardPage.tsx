@@ -11,25 +11,25 @@ function DashboardPage() {
         Streaks Dashboard
       </h1>
       <div className="flex flex-col justify-center items-center">
-        <div className="flex mt-4 items-center">
-          <p>Filtros:</p>
+        <div className="flex flex-col mt-4 items-stretch md:items-center md:flex-row">
+          <p className="font-medium">Filtros:</p>
           <Select options={["mock_1", "mock_2"]} unselectedText="Newsletter" />
           <Select
             options={["mock_1", "mock_2"]}
             unselectedText="Streak status"
           />
-          <div className="flex">
-            <div className="flex items-center">
+          <div className="flex flex-col md:flex-row">
+            <div className="flex md:items-center mx-1 my-1 md:my-0">
               <p>começa:</p>
               <input
-                className="border-brand-yellow border-2 rounded-md mr-2"
+                className="border-brand-yellow border-2 rounded-md md:mr-2"
                 type="date"
               />
             </div>
-            <div className="flex items-center">
+            <div className="flex md:items-center mx-1">
               <p>termina:</p>
               <input
-                className="border-brand-yellow border-2 rounded-md mr-2"
+                className="border-brand-yellow border-2 rounded-md md:mr-2"
                 type="date"
               />
             </div>

@@ -4,7 +4,7 @@ type Props = {
 };
 function Select({ unselectedText, options }: Props) {
   return (
-    <select className="text-brand-black border-solid border-brand-yellow border-2 rounded-md mx-1">
+    <select className="text-brand-black border-solid border-brand-yellow border-2 rounded-md mx-1 mt-1 md:my-0">
       <option className="text-gray-400" value="">
         {unselectedText}
       </option>
