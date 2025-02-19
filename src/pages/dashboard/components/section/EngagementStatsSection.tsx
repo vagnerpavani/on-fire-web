@@ -1,11 +1,12 @@
+import StatsAreaChart from "../structure/StatsAreaChart";
 import StatsLineChart from "../structure/StatsLineChart";
 
 function EngagementStatsSection() {
-  const mockData = [
+  const mockPeopleWithStreakData = [
     {
       name: "Newsletter A",
-      hasStreak: 200,
-      noStreak: 100,
+      hasStreak: 1,
+      noStreak: 299,
     },
     {
       name: "Newsletter B",
@@ -24,6 +25,28 @@ function EngagementStatsSection() {
     },
   ];
 
+  const mockRecordData = [
+    {
+      name: "Newsletter A",
+      highest: 8,
+    },
+    {
+      name: "Newsletter B",
+
+      highest: 10,
+    },
+    {
+      name: "Newsletter C",
+
+      highest: 11,
+    },
+    {
+      name: "Newsletter D",
+
+      highest: 12,
+    },
+  ];
+
   const colors = { hasStreak: "#2ecc71", noStreak: "#e74c3c " };
   return (
     <div className="p-2 bg-brand-white  rounded-md mt-2 border-solid border-2 border-gray-100 w-full">
@@ -31,13 +54,21 @@ function EngagementStatsSection() {
         Estátisticas de engajamento
       </h2>
       <div className="flex justify-between md:flex-row flex-col items-center">
-        <StatsLineChart
+        <StatsAreaChart
           title="Pessoas com streak"
-          data={mockData}
+          data={mockPeopleWithStreakData}
           colors={colors}
         />
-        <StatsLineChart title="Web" data={mockData} colors={colors} />
-        <StatsLineChart title="Saúde" data={mockData} colors={colors} />
+        <StatsLineChart
+          title="Records de streak"
+          data={mockRecordData}
+          colors={colors}
+        />
+        <StatsLineChart
+          title="Saúde"
+          data={mockPeopleWithStreakData}
+          colors={colors}
+        />
       </div>
     </div>
   );
