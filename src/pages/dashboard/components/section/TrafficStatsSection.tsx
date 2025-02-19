@@ -27,7 +27,8 @@ function TrafficStatsSection() {
         Estátisticas de tráfego:
       </h2>
       <div className="flex justify-around flex-col items-center md:flex-row ">
-        <SourcePieChart data={pieDataMock} />
+        <SourcePieChart data={pieDataMock} title="Streaks por origem:" />
+        <SourcePieChart data={pieDataMock} title="Streaks por midia:" />
         <ReaderBarChart data={barDataMock} />
       </div>
     </div>
