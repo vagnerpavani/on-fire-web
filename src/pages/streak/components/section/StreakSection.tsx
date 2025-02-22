@@ -10,6 +10,21 @@ type Props = {
 function StreakSection({ posts }: Props) {
   const [user, setUser] = useContext(UserContext);
 
+  const motivationalPhrases = [
+    "Está começando! Continue assim para subir de nível!",
+    "Bom streak! Continue assim para liberar novas conquistas",
+    "Que orgulho, esse streak já pode se exibir para os amigos!",
+    "Uau, que streak! Arrasou! Continue assim para continuar ON FIRE!",
+  ];
+
+  const getMotivationalPhrase = () => {
+    if (!user || !user.currentStreak) return 0;
+    if (user.currentStreak > 30) return 3;
+    if (user.currentStreak > 14) return 2;
+    if (user?.currentStreak > 3) return 1;
+    return 0;
+  };
+
   useEffect(() => {
     if (!user || !user.id || user.currentStreak || !setUser) return;
 
@@ -37,7 +52,7 @@ function StreakSection({ posts }: Props) {
           seguidos!
         </p>
         <p className="font-medium text-2xl">
-          Bom streak! Continue assim para liberar novas conquistas
+          {motivationalPhrases[getMotivationalPhrase()]}
         </p>
       </div>
     </div>
