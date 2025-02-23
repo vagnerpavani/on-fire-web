@@ -1,17 +1,63 @@
-import Reader from "../base/Reader";
+import { useEffect, useState } from "react";
+import Ranking from "../structure/Ranking";
+import { makeMainApiHttpClient } from "../../../../services/http-client";
+
+type RankingReaders = {
+  position: number;
+  id: number;
+  email: string;
+  recordStreak: number;
+  currentStreak: number;
+};
+
+type RankingResponse = {
+  currentStreakRanking: RankingReaders[];
+  recordStreakRanking: RankingReaders[];
+};
+
+type ReaderInfo = {
+  email: string;
+  position: number;
+  streak: number;
+};
 
 function ReaderRankingSection() {
+  const [recordRanking, setRecordRanking] = useState<ReaderInfo[]>([]);
+  const [currentRanking, setCurrentRanking] = useState<ReaderInfo[]>([]);
+  useEffect(() => {
+    const apiClient = makeMainApiHttpClient();
+    apiClient
+      .get("/streak/ranking")
+      .then((res: { data: RankingResponse }) => {
+        if (
+          !res.data ||
+          !res.data.recordStreakRanking ||
+          !res.data.currentStreakRanking
+        )
+          return;
+        setRecordRanking(
+          res.data.recordStreakRanking.map((user) => {
+            return { streak: user.recordStreak, ...user };
+          })
+        );
+        setCurrentRanking(
+          res.data.currentStreakRanking.map((user) => {
+            return { streak: user.currentStreak, ...user };
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <div className="p-2 bg-brand-white  rounded-md border-solid border-2 md:w-fit border-gray-100 flex flex-col items-stretch">
-      <h2 className="text-2xl font-bold text-brand-yellow">
-        Leitores mais engajados:
-      </h2>
-      <div className="h-48 overflow-auto">
-        <Reader isKing={true} email={"fulano@email.com"} position={1} />
-        <Reader isKing={false} email={"fulano2@email.com"} position={2} />
-        <Reader isKing={false} email={"fulano3@email.com"} position={3} />
-        <Reader isKing={false} email={"fulano4@email.com"} position={4} />
-        <Reader isKing={false} email={"fulano5@email.com"} position={5} />
+    <div className="flex flex-col w-full justify-between md:mt-2 md:flex-row items-center  md:mb-0">
+      <div className="md:mr-2 w-full my-2 md:my-0">
+        <Ranking title="Ranking de Streaks atuais" readers={currentRanking} />
+      </div>
+      <div className="w-full ">
+        <Ranking title="Ranking de Streaks recorde" readers={recordRanking} />
       </div>
     </div>
   );
