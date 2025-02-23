@@ -12,7 +12,9 @@ type Props = {
   data: DataItem[];
   colors: { [areaName: string]: string };
 };
+
 function DashboardAreaChart({ data, colors }: Props) {
+  if (!data[0]) return "";
   const Areas = () => {
     const areas = Object.keys(data[0]);
     return areas.map((area, i) => {
@@ -25,6 +27,7 @@ function DashboardAreaChart({ data, colors }: Props) {
           stackId={i}
           stroke={colors[area]}
           fill={colors[area]}
+          key={i}
         />
       );
     });
@@ -47,7 +50,7 @@ function DashboardAreaChart({ data, colors }: Props) {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        {Areas()}
+        {data ? Areas() : ""}
       </AreaChart>
     </ResponsiveContainer>
   );

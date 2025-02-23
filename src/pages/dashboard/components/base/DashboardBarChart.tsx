@@ -17,6 +17,7 @@ type Props = {
 
 function DashboardBarChart({ data, color }: Props) {
   const Bars = () => {
+    if (!data[0]) return "";
     const bars = Object.keys(data[0]);
     return bars.map((bar, i) => {
       return bar === "name" ? (
@@ -26,6 +27,7 @@ function DashboardBarChart({ data, color }: Props) {
           dataKey={bar}
           fill={color}
           activeBar={<Rectangle fill="pink" stroke="blue" />}
+          key={i}
         />
       );
     });
