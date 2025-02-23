@@ -18,7 +18,6 @@ function DashboardLineChart({ data, colors }: Props) {
     if (!data[0]) return "";
     const lines = Object.keys(data[0]);
     return lines.map((line, i) => {
-      console.log(line);
       return line === "name" ? (
         ""
       ) : (
