@@ -21,6 +21,7 @@ type StreakLossMetric = {
 };
 
 type StatsResponse = {
+  totalUsers: number;
   peopleWithStreak: [
     {
       postId: string;
@@ -101,7 +102,7 @@ function EngagementStatsSection({
             return {
               name: post.publishedAt,
               hasStreak: post.userWithStreak,
-              noStreak: post.userWithNoStreak,
+              noStreak: res.data.totalUsers - post.userWithStreak,
             };
           })
         );
@@ -135,7 +136,7 @@ function EngagementStatsSection({
         Estátisticas de engajamento
       </h2>
       <div className="flex justify-between md:flex-row flex-col items-center">
-        <StatsAreaChart
+        <StatsLineChart
           title="Pessoas com streak"
           data={peopleWithStreakMetric}
           colors={colors}
