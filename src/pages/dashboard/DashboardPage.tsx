@@ -38,8 +38,8 @@ function DashboardPage() {
         <div className="w-5/6">
           <div className="flex flex-col justify-center items-stretch w-full">
             <EngagementStatsSection />
-            <TrafficStatsSection />
             <ReaderRankingSection />
+            <TrafficStatsSection />
           </div>
         </div>
       </div>
