@@ -1,51 +1,100 @@
+import { useEffect, useState } from "react";
 import StatsAreaChart from "../structure/StatsAreaChart";
 import StatsLineChart from "../structure/StatsLineChart";
+import { makeMainApiHttpClient } from "../../../../services/http-client";
+
+type PeopleWithStreakMetric = {
+  name: string;
+  hasStreak: number;
+  noStreak: number;
+};
+
+type PostRecordsMetric = {
+  name: string;
+  highest: number;
+};
+
+type StreakLossMetric = {
+  name: string;
+  streakLoss: number;
+};
+
+type StatsResponse = {
+  peopleWithStreak: [
+    {
+      postId: string;
+      title: string;
+      publishedAt: string;
+      userWithStreak: number;
+      userWithNoStreak: number;
+    }
+  ];
+  postRecords: [
+    {
+      postId: string;
+      title: string;
+      publishedAt: string;
+      highestStreak: number;
+    }
+  ];
+  userStreakLoss: [
+    {
+      postId: string;
+      title: string;
+      publishedAt: string;
+      streakLoss: number;
+    }
+  ];
+};
 
 function EngagementStatsSection() {
-  const mockPeopleWithStreakData = [
-    {
-      name: "Newsletter A",
-      hasStreak: 1,
-      noStreak: 299,
-    },
-    {
-      name: "Newsletter B",
-      hasStreak: 250,
-      noStreak: 80,
-    },
-    {
-      name: "Newsletter C",
-      hasStreak: 300,
-      noStreak: 50,
-    },
-    {
-      name: "Newsletter D",
-      hasStreak: 350,
-      noStreak: 30,
-    },
-  ];
+  const [peopleWithStreakMetric, setPeopleWithStreakMetric] = useState<
+    PeopleWithStreakMetric[]
+  >([]);
 
-  const mockRecordData = [
-    {
-      name: "Newsletter A",
-      highest: 8,
-    },
-    {
-      name: "Newsletter B",
+  const [postRecordsMetric, setPostRecordsMetric] = useState<
+    PostRecordsMetric[]
+  >([]);
 
-      highest: 10,
-    },
-    {
-      name: "Newsletter C",
+  const [streakLossMetric, setStreakLossMetric] = useState<StreakLossMetric[]>(
+    []
+  );
 
-      highest: 11,
-    },
-    {
-      name: "Newsletter D",
+  useEffect(() => {
+    const apiClient = makeMainApiHttpClient();
 
-      highest: 12,
-    },
-  ];
+    apiClient.get("/streak/stats").then((res: { data: StatsResponse }) => {
+      if (!res.data) return;
+
+      setPeopleWithStreakMetric(
+        res.data.peopleWithStreak.map((post) => {
+          return {
+            name: post.publishedAt,
+            hasStreak: post.userWithStreak,
+            noStreak: post.userWithNoStreak,
+          };
+        })
+      );
+
+      setPostRecordsMetric(
+        res.data.postRecords.map((post) => {
+          return {
+            name: post.publishedAt,
+            highest: post.highestStreak,
+          };
+        })
+      );
+
+      setStreakLossMetric(
+        res.data.userStreakLoss.map((post) => {
+          return {
+            name: post.publishedAt,
+            streakLoss: post.streakLoss,
+          };
+        })
+      );
+    });
+  }, []);
 
   const colors = { hasStreak: "#2ecc71", noStreak: "#e74c3c " };
   return (
@@ -56,17 +105,17 @@ function EngagementStatsSection() {
       <div className="flex justify-between md:flex-row flex-col items-center">
         <StatsAreaChart
           title="Pessoas com streak"
-          data={mockPeopleWithStreakData}
+          data={peopleWithStreakMetric}
           colors={colors}
         />
         <StatsLineChart
           title="Records de streak"
-          data={mockRecordData}
+          data={postRecordsMetric}
           colors={colors}
         />
         <StatsLineChart
-          title="Saúde"
-          data={mockPeopleWithStreakData}
+          title="Perderam a streak"
+          data={streakLossMetric}
           colors={colors}
         />
       </div>
