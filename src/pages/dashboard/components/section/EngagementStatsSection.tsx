@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import StatsAreaChart from "../structure/StatsAreaChart";
 import StatsLineChart from "../structure/StatsLineChart";
 import { makeMainApiHttpClient } from "../../../../services/http-client";
+import dayjs from "dayjs";
 
 type PeopleWithStreakMetric = {
   name: string;
@@ -45,9 +46,24 @@ type StatsResponse = {
       streakLoss: number;
     }
   ];
+  posts: Post[];
 };
 
-function EngagementStatsSection() {
+type Props = {
+  newsletterFilter: string;
+  streakStatusFilter: string;
+  startAtFilter: string;
+  endAtFilter: string;
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+};
+
+function EngagementStatsSection({
+  setPosts,
+  newsletterFilter,
+  streakStatusFilter,
+  startAtFilter,
+  endAtFilter,
+}: Props) {
   const [peopleWithStreakMetric, setPeopleWithStreakMetric] = useState<
     PeopleWithStreakMetric[]
   >([]);
@@ -63,38 +79,54 @@ function EngagementStatsSection() {
   useEffect(() => {
     const apiClient = makeMainApiHttpClient();
 
-    apiClient.get("/streak/stats").then((res: { data: StatsResponse }) => {
-      if (!res.data) return;
+    const params: {
+      startAt?: string;
+      endAt?: string;
+      postId?: string;
+      streakStatus?: string;
+    } = {};
 
-      setPeopleWithStreakMetric(
-        res.data.peopleWithStreak.map((post) => {
-          return {
-            name: post.publishedAt,
-            hasStreak: post.userWithStreak,
-            noStreak: post.userWithNoStreak,
-          };
-        })
-      );
+    newsletterFilter ? (params.postId = newsletterFilter) : null;
+    streakStatusFilter ? (params.streakStatus = streakStatusFilter) : null;
+    startAtFilter ? (params.startAt = dayjs(startAtFilter).format()) : null;
+    endAtFilter ? (params.endAt = dayjs(endAtFilter).format()) : null;
 
-      setPostRecordsMetric(
-        res.data.postRecords.map((post) => {
-          return {
-            name: post.publishedAt,
-            highest: post.highestStreak,
-          };
-        })
-      );
+    apiClient
+      .get("/streak/stats", { params })
+      .then((res: { data: StatsResponse }) => {
+        if (!res.data) return;
 
-      setStreakLossMetric(
-        res.data.userStreakLoss.map((post) => {
-          return {
-            name: post.publishedAt,
-            streakLoss: post.streakLoss,
-          };
-        })
-      );
-    });
-  }, []);
+        setPeopleWithStreakMetric(
+          res.data.peopleWithStreak.map((post) => {
+            return {
+              name: post.publishedAt,
+              hasStreak: post.userWithStreak,
+              noStreak: post.userWithNoStreak,
+            };
+          })
+        );
+
+        setPostRecordsMetric(
+          res.data.postRecords.map((post) => {
+            return {
+              name: post.publishedAt,
+              highest: post.highestStreak,
+            };
+          })
+        );
+
+        setStreakLossMetric(
+          res.data.userStreakLoss.map((post) => {
+            return {
+              name: post.publishedAt,
+              streakLoss: post.streakLoss,
+            };
+          })
+        );
+
+        setPosts(res.data.posts);
+      });
+  }, [newsletterFilter, streakStatusFilter, startAtFilter, endAtFilter]);
 
   const colors = { hasStreak: "#2ecc71", noStreak: "#e74c3c " };
   return (

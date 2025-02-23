@@ -1,10 +1,18 @@
 type Props = {
   unselectedText: string;
   options: string[];
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
-function Select({ unselectedText, options }: Props) {
+function Select({ unselectedText, options, value, setValue }: Props) {
   return (
-    <select className="text-brand-black border-solid border-brand-yellow border-2 rounded-md mx-1 mt-1 md:my-0">
+    <select
+      value={value}
+      onChange={(e) => {
+        setValue(e.target.value);
+      }}
+      className="text-brand-black border-solid border-brand-yellow border-2 rounded-md mx-1 mt-1 md:my-0"
+    >
       <option className="text-gray-400" value="">
         {unselectedText}
       </option>

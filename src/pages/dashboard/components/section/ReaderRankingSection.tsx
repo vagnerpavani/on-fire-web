@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Ranking from "../structure/Ranking";
 import { makeMainApiHttpClient } from "../../../../services/http-client";
+import dayjs from "dayjs";
 
 type RankingReaders = {
   position: number;
@@ -21,13 +22,38 @@ type ReaderInfo = {
   streak: number;
 };
 
-function ReaderRankingSection() {
+type Props = {
+  newsletterFilter: string;
+  streakStatusFilter: string;
+  startAtFilter: string;
+  endAtFilter: string;
+};
+
+function ReaderRankingSection({
+  newsletterFilter,
+  streakStatusFilter,
+  startAtFilter,
+  endAtFilter,
+}: Props) {
   const [recordRanking, setRecordRanking] = useState<ReaderInfo[]>([]);
   const [currentRanking, setCurrentRanking] = useState<ReaderInfo[]>([]);
   useEffect(() => {
     const apiClient = makeMainApiHttpClient();
+
+    const params: {
+      startAt?: string;
+      endAt?: string;
+      postId?: string;
+      streakStatus?: string;
+    } = {};
+
+    newsletterFilter ? (params.postId = newsletterFilter) : null;
+    streakStatusFilter ? (params.streakStatus = streakStatusFilter) : null;
+    startAtFilter ? (params.startAt = dayjs(startAtFilter).format()) : null;
+    endAtFilter ? (params.endAt = dayjs(endAtFilter).format()) : null;
+
     apiClient
-      .get("/streak/ranking")
+      .get("/streak/ranking", { params })
       .then((res: { data: RankingResponse }) => {
         if (
           !res.data ||

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReaderBarChart from "../structure/ReaderBarChart";
 import SourcePieChart from "../structure/SourcePieChart";
 import { makeMainApiHttpClient } from "../../../../services/http-client";
+import dayjs from "dayjs";
 
 type Read = {
   id: string;
@@ -29,7 +30,19 @@ type Metric = {
   value: number;
 };
 
-function TrafficStatsSection() {
+type Props = {
+  newsletterFilter: string;
+  streakStatusFilter: string;
+  startAtFilter: string;
+  endAtFilter: string;
+};
+
+function TrafficStatsSection({
+  newsletterFilter,
+  streakStatusFilter,
+  startAtFilter,
+  endAtFilter,
+}: Props) {
   const [campaignMetrics, setCampaignMetrics] = useState<Metric[]>([]);
   const [mediumMetrics, setMediumMetrics] = useState<Metric[]>([]);
   const [sourceMetrics, setSourceMetrics] = useState<Metric[]>([]);
@@ -40,22 +53,35 @@ function TrafficStatsSection() {
     const utmSources: Record<string, number> = {};
 
     const apiClient = makeMainApiHttpClient();
+    const params: {
+      startAt?: string;
+      endAt?: string;
+      postId?: string;
+      streakStatus?: string;
+    } = {};
 
-    apiClient.get("/streak/stats").then((res: { data: StatsResponse }) => {
-      const reads: Read[] = [];
-      res.data.posts.forEach((post) => {
-        reads.push(...post.reads);
-      });
+    newsletterFilter ? (params.postId = newsletterFilter) : null;
+    streakStatusFilter ? (params.streakStatus = streakStatusFilter) : null;
+    startAtFilter ? (params.startAt = dayjs(startAtFilter).format()) : null;
+    endAtFilter ? (params.endAt = dayjs(endAtFilter).format()) : null;
 
-      reads.forEach((read) => {
-        if (read.utmCampaign)
-          utmCampaigns[read.utmCampaign] = utmCampaigns[read.utmCampaign] + 1;
-        if (read.utmMedium)
-          utmMediums[read.utmMedium] = utmMediums[read.utmMedium] + 1;
-        if (read.utmSource)
-          utmSources[read.utmSource] = utmSources[read.utmSource] + 1;
+    apiClient
+      .get("/streak/stats", { params })
+      .then((res: { data: StatsResponse }) => {
+        const reads: Read[] = [];
+        res.data.posts.forEach((post) => {
+          reads.push(...post.reads);
+        });
+
+        reads.forEach((read) => {
+          if (read.utmCampaign)
+            utmCampaigns[read.utmCampaign] = utmCampaigns[read.utmCampaign] + 1;
+          if (read.utmMedium)
+            utmMediums[read.utmMedium] = utmMediums[read.utmMedium] + 1;
+          if (read.utmSource)
+            utmSources[read.utmSource] = utmSources[read.utmSource] + 1;
+        });
       });
-    });
 
     const campaignFormated = Object.entries(utmCampaigns).map(
       ([name, value]): Metric => ({ name, value })
