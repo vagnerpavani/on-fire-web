@@ -29,7 +29,7 @@ function StreakSection({ posts }: Props) {
     if (!user || !user.id || user.currentStreak || !setUser) return;
 
     const apiClient = makeMainApiHttpClient();
-    apiClient.get(`/streak/${user.id}`).then((res) => {
+    apiClient.get(`/streak/user/${user.id}`).then((res) => {
       if (!res.data.currentStreak) return;
       setUser({
         email: user.email,
