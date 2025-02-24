@@ -64,7 +64,7 @@ function TrafficStatsSection({
       <div className="flex justify-around flex-col items-center md:flex-row ">
         <SourcePieChart data={sourceMetrics} title="Streaks por origem:" />
         <SourcePieChart data={mediumMetrics} title="Streaks por midia:" />
-        <ReaderBarChart data={campaignMetrics} />
+        <ReaderBarChart data={campaignMetrics} title="Streaks por campanha:" />
       </div>
     </div>
   );
