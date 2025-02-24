@@ -46,3 +46,7 @@
     Os casos de uso poderiam ser testados isoladamente também como testes unitários. No front end, só realizei testes manuais mesmo.
     ## Quanto tempo levou o desenvolvimento e testes?
     Acho que gastei umas 35< horas nesse projeto. Mas entre desenvolvimento e testes, acredito que juntando esses tipos de teste, deve dar umas 10 horas. Eu não marquei bem o tempo mas estou estimando.
+
+# Sugestão de melhoria para a gameficação
+
+Acho que uma coisa que ajuda é conseguir compartilhar diretamente nas redes sociais e ter algum personalizavel e exclusivo. Por exemplo, se esse streak liberasse uma aparencia unica naquela tela de streak, de acordo com o nível. Ou se existisse algum mascote ou item que a pessoa consiga costumizar de acordo com o nível dela. No fim das contas, esses streaks só fazem sentido porque queremos compartilhar com os amigos, ou competir com outras pessoas, então acredito que tudo que reforce essa ideia de status "único" ajuda a incentivar mais os streaks.
