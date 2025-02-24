@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# On fire web app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Esse projeto tem o proposito de cadastrar e exibir os streaks de leituras de newsletters do the news.
 
-Currently, two official plugins are available:
+## Rodando o projeto em desenvolvimento
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Crie um arquivo .env.local com as seguintes informações:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+VITE_MAIN_API_URL=<URL DA API>
+VITE_BEEHIV_API_URL=https://backend.testeswaffle.org/
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+npm install
+npm run dev
+```
+
+# Organização do projeto
+
+## Componentes
+
+- Componentes globais estão diretamente na pasta src/components e também estão divididos em basic, structure e section. (E icons)
+
+- Basic: Componentes mais simples que não dependem de nenhum outro componente. Devem ter o menor escopo possível e só devem depender de outro componente se for para servir como Wrapper.
+
+- Structure: Componentes intermediarios que usam componentes básicos e html para formar um componente com um propósito mais estabelecido. Ex: Uma lista de usuarios, um conjunto que forma um gráfico, etc.
+
+- Sections: São os componentes com maior contexto e que consomem os componentes basicos e de estrutura para formar as seções da página. Só devem ser consumidos por componentes página.
+
+- Pages: Componentes mais alto da arvore, que consome os outros tipos de componentes para formar a página.
+
+- Services: Servem para encapsular lógicas que não serão hooks mas serão usadas em outros lugares.
