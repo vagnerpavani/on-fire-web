@@ -22,7 +22,7 @@ function DashboardPage() {
         <div className="flex flex-col mt-4 items-stretch md:items-center md:flex-row">
           <p className="font-medium">Filtros:</p>
           <Select
-            options={posts.map((p) => p.title)}
+            options={posts.map((p) => p.id)}
             unselectedText="Newsletter"
             value={newsletterFilter}
             setValue={setNewsletterFilter}
@@ -35,7 +35,7 @@ function DashboardPage() {
           />
           <div className="flex flex-col md:flex-row">
             <div className="flex md:items-center mx-1 my-1 md:my-0">
-              <p>começa:</p>
+              <p>Início:</p>
               <input
                 className="border-brand-yellow border-2 rounded-md md:mr-2"
                 type="date"
@@ -46,7 +46,7 @@ function DashboardPage() {
               />
             </div>
             <div className="flex md:items-center mx-1">
-              <p>termina:</p>
+              <p>Fim:</p>
               <input
                 className="border-brand-yellow border-2 rounded-md md:mr-2"
                 type="date"

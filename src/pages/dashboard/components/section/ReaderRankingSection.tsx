@@ -75,7 +75,7 @@ function ReaderRankingSection({
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [newsletterFilter, streakStatusFilter, startAtFilter, endAtFilter]);
 
   return (
     <div className="flex flex-col w-full justify-between md:mt-2 md:flex-row items-center  md:mb-0">

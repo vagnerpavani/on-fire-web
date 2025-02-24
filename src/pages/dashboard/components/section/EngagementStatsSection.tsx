@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import StatsAreaChart from "../structure/StatsAreaChart";
 import StatsLineChart from "../structure/StatsLineChart";
 import { makeMainApiHttpClient } from "../../../../services/http-client";
 import dayjs from "dayjs";
@@ -100,7 +99,7 @@ function EngagementStatsSection({
         setPeopleWithStreakMetric(
           res.data.peopleWithStreak.map((post) => {
             return {
-              name: post.publishedAt,
+              name: dayjs(post.publishedAt).format("DD/MM/YYYY"),
               hasStreak: post.userWithStreak,
               noStreak: res.data.totalUsers - post.userWithStreak,
             };
@@ -110,7 +109,7 @@ function EngagementStatsSection({
         setPostRecordsMetric(
           res.data.postRecords.map((post) => {
             return {
-              name: post.publishedAt,
+              name: dayjs(post.publishedAt).format("DD/MM/YYYY"),
               highest: post.highestStreak,
             };
           })
@@ -119,7 +118,7 @@ function EngagementStatsSection({
         setStreakLossMetric(
           res.data.userStreakLoss.map((post) => {
             return {
-              name: post.publishedAt,
+              name: dayjs(post.publishedAt).format("DD/MM/YYYY"),
               streakLoss: post.streakLoss,
             };
           })
@@ -132,17 +131,17 @@ function EngagementStatsSection({
   const colors = { hasStreak: "#2ecc71", noStreak: "#e74c3c " };
   return (
     <div className="p-2 bg-brand-white  rounded-md mt-2 border-solid border-2 border-gray-100 w-full">
-      <h2 className="font-bold text-2xl text-brand-yellow w-full md:text-start text-center">
-        Estátisticas de engajamento
+      <h2 className="font-bold text-2xl text-brand-yellow w-full text-center">
+        Estatísticas de engajamento
       </h2>
       <div className="flex justify-between md:flex-row flex-col items-center">
         <StatsLineChart
-          title="Pessoas com streak"
+          title="Pessoas com streak x Newsletter"
           data={peopleWithStreakMetric}
           colors={colors}
         />
         <StatsLineChart
-          title="Records de streak"
+          title="Records de streak x Newsletter"
           data={postRecordsMetric}
           colors={colors}
         />

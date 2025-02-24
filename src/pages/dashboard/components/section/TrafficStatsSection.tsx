@@ -54,12 +54,12 @@ function TrafficStatsSection({
         if (res.data.mediumResults) setMediumMetrics(res.data.mediumResults);
         if (res.data.sourceResults) setSourceMetrics(res.data.sourceResults);
       });
-  }, []);
+  }, [newsletterFilter, streakStatusFilter, startAtFilter, endAtFilter]);
 
   return (
     <div className="p-2 bg-brand-white  rounded-md  my-2 border-solid border-2 border-gray-100">
-      <h2 className="text-2xl font-bold text-brand-yellow w-full md:text-start text-center">
-        Estátisticas de tráfego:
+      <h2 className="text-2xl font-bold text-brand-yellow w-full text-center">
+        Estatísticas de tráfego:
       </h2>
       <div className="flex justify-around flex-col items-center md:flex-row ">
         <SourcePieChart data={sourceMetrics} title="Streaks por origem:" />
