@@ -8,7 +8,7 @@ type Props = {
 function Ranking({ title, readers }: Props) {
   return (
     <div className="p-2  bg-brand-white  rounded-md border-solid border-2 w-full border-gray-100 flex flex-col items-stretch">
-      <h2 className="text-2xl font-bold text-center text-brand-yellow">
+      <h2 className="text-2xl font-bold text-center text-brand-yellow mb-2">
         {title}
       </h2>
       <div className="h-48 overflow-auto w-full">

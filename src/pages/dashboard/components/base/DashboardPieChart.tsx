@@ -1,4 +1,4 @@
-import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 type Props = {
   data: { name: string; value: number }[];
@@ -15,11 +15,11 @@ function DashboardPieChart({ data, color }: Props) {
           data={data}
           cx="50%"
           cy="50%"
-          outerRadius={80}
+          outerRadius={70}
           fill={color}
           label
         />
-
+        <Legend />
         <Tooltip />
       </PieChart>
     </ResponsiveContainer>

@@ -7,7 +7,7 @@ function SourcePieChart({ data, title }: Props) {
     <div>
       <h3 className="pl-8 font-medium">{title}</h3>
       <div className="w-64 h-64">
-        <DashboardPieChart data={data} color="#4433aa" />
+        <DashboardPieChart data={data} color="#240E0B" />
       </div>
     </div>
   );

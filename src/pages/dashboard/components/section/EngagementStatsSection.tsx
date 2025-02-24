@@ -131,7 +131,7 @@ function EngagementStatsSection({
   const colors = { hasStreak: "#2ecc71", noStreak: "#e74c3c " };
   return (
     <div className="p-2 bg-brand-white  rounded-md mt-2 border-solid border-2 border-gray-100 w-full">
-      <h2 className="font-bold text-2xl text-brand-yellow w-full text-center">
+      <h2 className="font-bold text-2xl text-brand-yellow w-full text-center mb-2">
         Estatísticas de engajamento
       </h2>
       <div className="flex justify-between md:flex-row flex-col items-center">

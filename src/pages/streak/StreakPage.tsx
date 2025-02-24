@@ -32,6 +32,7 @@ function StreakPage() {
 
   useEffect(() => {
     const searchParamsObj = Object.fromEntries(searchParams);
+    console.log(searchParamsObj);
     const incomingWebhook = {
       postId: searchParamsObj.id || "",
       email: searchParamsObj.email || "",

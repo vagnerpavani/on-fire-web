@@ -58,13 +58,13 @@ function TrafficStatsSection({
 
   return (
     <div className="p-2 bg-brand-white  rounded-md  my-2 border-solid border-2 border-gray-100">
-      <h2 className="text-2xl font-bold text-brand-yellow w-full text-center">
-        Estatísticas de tráfego:
+      <h2 className="text-2xl font-bold text-brand-yellow w-full text-center mb-2">
+        Estatísticas de tráfego
       </h2>
       <div className="flex justify-around flex-col items-center md:flex-row ">
-        <SourcePieChart data={sourceMetrics} title="Streaks por origem:" />
-        <SourcePieChart data={mediumMetrics} title="Streaks por midia:" />
-        <ReaderBarChart data={campaignMetrics} title="Streaks por campanha:" />
+        <SourcePieChart data={sourceMetrics} title="Streaks por origem" />
+        <SourcePieChart data={mediumMetrics} title="Streaks por midia" />
+        <ReaderBarChart data={campaignMetrics} title="Streaks por campanha" />
       </div>
     </div>
   );

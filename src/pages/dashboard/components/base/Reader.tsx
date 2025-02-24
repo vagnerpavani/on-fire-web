@@ -9,7 +9,7 @@ type Props = {
 
 function Reader({ email, isKing, position, streak }: Props) {
   return (
-    <div className="flex justify-between items-center w-full border-brand-yellow border-2 rounded-md border-solid my-2">
+    <div className="flex justify-between items-center w-full rounded-md border-solid my-2">
       <div className="flex mr-1 items-center">
         <span className="ml-2 mr-1 text-brand-yellow w-4 h-6 flex justify-center items-center">
           {isKing ? <CrownIcon color="#ffce04" /> : position}

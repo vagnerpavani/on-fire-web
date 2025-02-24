@@ -7,7 +7,7 @@ function ReaderBarChart({ data, title }: Props) {
     <div>
       <h3 className="pl-8 font-medium">{title}</h3>
       <div className="w-64 h-64">
-        <DashboardBarChart data={data} color="#4433aa" />
+        <DashboardBarChart data={data} color="#240E0B" />
       </div>
     </div>
   );

@@ -78,7 +78,7 @@ function ReaderRankingSection({
   }, [newsletterFilter, streakStatusFilter, startAtFilter, endAtFilter]);
 
   return (
-    <div className="flex flex-col w-full justify-between md:mt-2 md:flex-row items-center  md:mb-0">
+    <div className="flex flex-col w-full justify-between md:mt-2 md:flex-row items-center md:mb-0">
       <div className="md:mr-2 w-full my-2 md:my-0">
         <Ranking title="Ranking de Streaks atuais" readers={currentRanking} />
       </div>
