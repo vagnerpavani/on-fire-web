@@ -4,25 +4,10 @@ import SourcePieChart from "../structure/SourcePieChart";
 import { makeMainApiHttpClient } from "../../../../services/http-client";
 import dayjs from "dayjs";
 
-type Read = {
-  id: string;
-  userId: string;
-  postId: string;
-  utmSource: string | null;
-  utmMedium: string | null;
-  utmCampaign: string | null;
-  utmChannel: string | null;
-};
-
 type StatsResponse = {
-  posts: [
-    {
-      id: string;
-      title: string;
-      publishedAt: string;
-      reads: Read[];
-    }
-  ];
+  campaignResults: Metric[];
+  sourceResults: Metric[];
+  mediumResults: Metric[];
 };
 
 type Metric = {
@@ -48,10 +33,6 @@ function TrafficStatsSection({
   const [sourceMetrics, setSourceMetrics] = useState<Metric[]>([]);
 
   useEffect(() => {
-    const utmCampaigns: Record<string, number> = {};
-    const utmMediums: Record<string, number> = {};
-    const utmSources: Record<string, number> = {};
-
     const apiClient = makeMainApiHttpClient();
     const params: {
       startAt?: string;
@@ -68,33 +49,11 @@ function TrafficStatsSection({
     apiClient
       .get("/streak/stats", { params })
       .then((res: { data: StatsResponse }) => {
-        const reads: Read[] = [];
-        res.data.posts.forEach((post) => {
-          reads.push(...post.reads);
-        });
-
-        reads.forEach((read) => {
-          if (read.utmCampaign)
-            utmCampaigns[read.utmCampaign] = utmCampaigns[read.utmCampaign] + 1;
-          if (read.utmMedium)
-            utmMediums[read.utmMedium] = utmMediums[read.utmMedium] + 1;
-          if (read.utmSource)
-            utmSources[read.utmSource] = utmSources[read.utmSource] + 1;
-        });
+        if (res.data.campaignResults)
+          setCampaignMetrics(res.data.campaignResults);
+        if (res.data.mediumResults) setMediumMetrics(res.data.mediumResults);
+        if (res.data.sourceResults) setSourceMetrics(res.data.sourceResults);
       });
-
-    const campaignFormated = Object.entries(utmCampaigns).map(
-      ([name, value]): Metric => ({ name, value })
-    );
-    const mediumFormated = Object.entries(utmMediums).map(
-      ([name, value]): Metric => ({ name, value })
-    );
-    const sourceFormated = Object.entries(utmSources).map(
-      ([name, value]): Metric => ({ name, value })
-    );
-    setCampaignMetrics(campaignFormated);
-    setMediumMetrics(mediumFormated);
-    setSourceMetrics(sourceFormated);
   }, []);
 
   return (
